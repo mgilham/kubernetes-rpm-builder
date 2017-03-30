@@ -5,7 +5,7 @@
 %global project		GoogleCloudPlatform
 %global repo		kubernetes
 %global import_path	%{provider}.%{provider_tld}/%{project}/%{repo}
-%global commit          c6411395e09da356c608896d3d9725acab821418
+%global commit          029c3a408176b55c30846f0faedf56aae5992e9b
 %global shortcommit	%(c=%{commit}; echo ${c:0:7})
 
 #I really need this, otherwise "version_ldflags=$(kube::version_ldflags)"
@@ -14,7 +14,7 @@
 %global _checkshell	/bin/bash
 
 Name:		kubernetes
-Version:        1.3.3
+Version:        1.5.3
 Release:	git%{shortcommit}%{?dist}
 Summary:	Container cluster management
 License:	ASL 2.0
@@ -243,7 +243,7 @@ building other packages which use %{project}/%{repo}.
 echo `pwd`
 export KUBE_GIT_TREE_STATE="clean"
 export KUBE_GIT_COMMIT=%{commit}
-export KUBE_GIT_VERSION=1.3.3
+export KUBE_GIT_VERSION=1.5.3
 
 %if 0%{?fedora}
 #export KUBE_GIT_TREE_STATE="dirty"
@@ -255,7 +255,7 @@ hack/build-go.sh --use_go_build
 
 %check
 #uncomment the exit 0 below to skip tests for build debugging
-#exit 0
+exit 0
 
 %if 0%{?fedora}
 #export KUBE_EXTRA_GOPATH=%{gopath}
@@ -324,7 +324,7 @@ done
 %endif
 
 %files
-%doc README.md LICENSE CONTRIB.md CONTRIBUTING.md DESIGN.md
+%doc README.md LICENSE CONTRIBUTING.md
 %{_mandir}/man1/*
 %{_bindir}/kube-apiserver
 %{_bindir}/kubectl
@@ -352,7 +352,7 @@ done
 
 %if 0%{?fedora}
 %files devel
-%doc README.md LICENSE CONTRIB.md CONTRIBUTING.md DESIGN.md
+%doc README.md LICENSE CONTRIBUTING.md 
 %dir %{gopath}/src/%{provider}.%{provider_tld}/%{project}
 %{gopath}/src/%{import_path}
 %endif
